@@ -10,8 +10,8 @@ permalink:        pretty
 title:            Xinyi Dong
 tagline:          'Technical Artist'
 description:      'Technical Artist'
-# url:              http://blumenkranz07.github.io
-baseurl:          ""
+url:              http://blumenkranz07.github.io
+baseurl:          /
 
 author:
   name:           'Mark Otto'
