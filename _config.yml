@@ -5,8 +5,6 @@ highlighter:      pygments
 # Permalinks
 permalink:        pretty
 # relative_permalinks: true
-relative_permalinks:
-  collections: true
 
 # Setup
 title:            Xinyi Dong
