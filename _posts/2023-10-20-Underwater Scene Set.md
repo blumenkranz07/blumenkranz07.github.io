@@ -12,3 +12,11 @@ It's an immensely useful tool and one we encourage you to use here with Hyde.
 Find out more by [visiting the project on GitHub](https://github.com/mojombo/jekyll).--!>
 
 
+### Rendering
+![placeholder](http://placehold.it/800x400 "Large example image")
+
+### StoryBoard
+![placeholder](http://placehold.it/400x200 "Medium example image")
+
+### Modeling
+![placeholder](http://placehold.it/200x200 "Small example image")
