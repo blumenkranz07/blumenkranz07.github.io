@@ -12,11 +12,11 @@ It's an immensely useful tool and one we encourage you to use here with Hyde.
 Find out more by [visiting the project on GitHub](https://github.com/mojombo/jekyll).-->
 
 
-### Rendering
-![placeholder](http://placehold.it/800x400 "Large example image")
+### Blender Rendering
+![placeholder](https://github.com/blumenkranz07/blumenkranz07.github.io/blob/master/data/underwater/untitled%201.png "Blender Rendering")
 
-### StoryBoard
-![placeholder](http://placehold.it/400x200 "Medium example image")
+### Concept Skeches
+![placeholder](https://github.com/blumenkranz07/blumenkranz07.github.io/blob/master/data/underwater/image%203.png "Concept Sketches")
 
 ### Modeling
-![placeholder](http://placehold.it/200x200 "Small example image")
+![placeholder](https://github.com/blumenkranz07/blumenkranz07.github.io/blob/master/data/underwater/Weixin%20Image_20231022232950%201.png "Modeling in Blender")
