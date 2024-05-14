@@ -13,7 +13,8 @@ Find out more by [visiting the project on GitHub](https://github.com/mojombo/jek
 
 
 ### Blender Rendering
-![placeholder](https://github.com/blumenkranz07/blumenkranz07.github.io/blob/master/data/underwater/untitled%201.png "Blender Rendering")
+![placeholder](https://blumenkranz07.github.io/blob/master/data/underwater/untitled%201.png "Blender Rendering")
+
 
 ### Concept Skeches
 ![placeholder](https://github.com/blumenkranz07/blumenkranz07.github.io/blob/master/data/underwater/image%203.png "Concept Sketches")
