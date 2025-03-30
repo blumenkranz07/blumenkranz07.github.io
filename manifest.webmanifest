@@ -1,5 +1,5 @@
 {
-    "name": "Xinyi Dong World of Wonders",
+    "name": "Xinyi Dong Personal Website",
     "short_name": "Xinyi Dong",
     "description": "Xinyi Dong - Technical Artist / Developer",
     "categories": [
@@ -11,7 +11,7 @@
             "src": "screenshots/screenshot.gif",
             "type": "image/gif",
             "sizes": "1472x958",
-            "label": "blumenkranz07's World of Wonders"
+            "label": "blumenkranz07's Personal Website"
         }
     ],
     "icons": [
