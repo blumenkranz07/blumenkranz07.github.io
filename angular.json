@@ -53,7 +53,7 @@
 							"src/assets/js/particles.min.js",
 							"src/assets/js/vanilla-tilt.min.js"
 						],
-						"serviceWorker": true,
+						"serviceWorker": false,
 						"ngswConfigPath": "ngsw-config.json"
 					},
 					"configurations": {

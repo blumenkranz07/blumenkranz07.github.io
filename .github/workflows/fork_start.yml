@@ -17,4 +17,4 @@ jobs:
         uses: ouuan/This-repo-has-x-stars-y-forks-action@v2
         with:
           token: ${{ secrets.GH_TOKEN_PR }}
-          template: "JayantGoel001's World of Wonders with <starCount> stars ⭐ and <forkCount> forks 🎉."
+          template: "JayantGoel001's Personal Website with <starCount> stars ⭐ and <forkCount> forks 🎉."

@@ -1,7 +1,7 @@
 {
   "name": "blumenkranz07.github.io",
   "version": "2.0.0",
-  "description": "Xinyi Dong's World of Wonders",
+  "description": "Xinyi Dong's Personal Website",
   "main": "index.js",
   "author": "Xinyi Dong",
   "license": "MIT",
@@ -13,7 +13,7 @@
     "Xinyi Dong",
     "Xinyi Dong Portfolio",
     "blumenkranz07",
-    "Xinyi Dong's World of Wonders"
+    "Xinyi Dong's Personal Website"
   ],
   "repository": "https://github.com/blumenkranz07/blumenkranz07.github.io",
   "homepage": "https://blumenkranz07.github.io",
