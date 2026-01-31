@@ -1,0 +1,194 @@
+
+<div class="project-detail-wrapper" *ngIf="project">
+	<section class="section project-detail-section">
+		<div class="container">
+			<!-- Back Button -->
+			<div class="row justify-content-center mb-4">
+				<div class="col-lg-11">
+					<div class="back-btn-container">
+						<button class="btn btn-outline-light back-btn" (click)="goBack()">
+							<i class="fas fa-arrow-left"></i> <-Back
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Project Header (Shared across all projects) -->
+			<div class="row justify-content-center mb-5">
+				<div class="col-lg-10">
+					<div class="project-header text-center">
+						<h1 class="project-title mb-3">{{ getProjectName() }}</h1>
+						<p *ngIf="project.duration" class="project-duration">{{ project.duration }}</p>
+						<!-- <p class="project-description lead">{{ project.description }}</p> -->
+					</div>
+				</div>
+			</div>
+
+			<!-- Dynamic Content Blocks -->
+			<div *ngIf="hasCustomContent(); else defaultTemplate">
+				<!-- Custom Content: Render blocks from project.content array -->
+				<div *ngFor="let block of getProjectContent()" class="row justify-content-center mb-3">
+					
+					<!-- Gallery Block: Special handling for full-width gallery -->
+					<div *ngIf="block.type === 'gallery'" class="col-lg-10">
+						<div class="row gallery-row">
+							<div [ngClass]="getGalleryColumnClass(block.columns || 3)" *ngFor="let image of block.images">
+								<div class="project-image-container">
+									<img 
+										[src]="getImageSrc({src: image.src || image})" 
+										[alt]="(image.alt || getProjectName())"
+										class="img-fluid project-main-image"
+										loading="lazy">
+									<p *ngIf="image.caption" class="text-center text-muted mt-2 small">{{ image.caption }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Other Block Types -->
+					<div *ngIf="block.type !== 'gallery'" [ngSwitch]="block.type" class="col-lg-10">
+						
+						<!-- Text Block -->
+						<div *ngSwitchCase="'text'" class="project-content-plain">
+							<p [innerHTML]="block.text"></p>
+						</div>
+
+						<!-- Heading Block -->
+						<div *ngSwitchCase="'heading'" class="project-content-plain">
+							<h2 *ngIf="block.level === 2" class="h3 mb-3">{{ block.text }}</h2>
+							<h3 *ngIf="block.level === 3" class="h4 mb-3">{{ block.text }}</h3>
+							<h4 *ngIf="block.level === 4" class="h5 mb-3">{{ block.text }}</h4>
+							<h3 *ngIf="!block.level" class="h4 mb-3">{{ block.text }}</h3>
+						</div>
+
+						<!-- Image Block -->
+						<div *ngSwitchCase="'image'" class="project-image-container">
+							<img 
+								[src]="getImageSrc(block)" 
+								[alt]="block.alt || getProjectName()"
+								class="img-fluid project-main-image"
+								loading="lazy">
+							<p *ngIf="block.caption" class="text-center text-muted mt-2">{{ block.caption }}</p>
+						</div>
+
+					<!-- Video Block -->
+					<div *ngSwitchCase="'video'" class="project-video-container">
+						<!-- YouTube/External Video Embed (iframe) -->
+						<iframe 
+							*ngIf="isYouTubeEmbed(block)"
+							class="project-youtube-embed"
+							[src]="getSafeUrl(block.url)"
+							frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen>
+						</iframe>
+						
+						<!-- Local Video File (video tag) -->
+						<video 
+							*ngIf="!isYouTubeEmbed(block)"
+							class="img-fluid project-main-video"
+							[poster]="block.poster ? getImageSrc({src: block.poster}) : ''"
+							controls
+							[autoplay]="block.autoplay || false"
+							[loop]="block.loop || false"
+							[muted]="block.muted || false">
+							<source [src]="getVideoSrc(block)" [type]="block.videoType || 'video/mp4'">
+							Your browser does not support the video tag.
+						</video>
+						<p *ngIf="block.caption" class="text-center text-muted mt-2">{{ block.caption }}</p>
+					</div>
+
+						<!-- Technologies Block -->
+						<div *ngSwitchCase="'technologies'" class="project-content">
+							<h3 class="h4 mb-3">Technologies</h3>
+							<div class="technologies-list">
+								<span *ngFor="let tech of (block.technologies || [])" class="badge badge-custom mr-2 mb-2">
+									{{ tech }}
+								</span>
+							</div>
+						</div>
+
+						<!-- Link Block -->
+						<div *ngSwitchCase="'link'" class="project-content-plain text-center">
+							<a [href]="block.url" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+								<i class="fas fa-external-link-alt"></i> {{ block.text || 'View Project' }}
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Default Template: Fallback for projects without custom content -->
+			<ng-template #defaultTemplate>
+				<!-- Default Project Image -->
+				<div class="row justify-content-center mb-5">
+					<div class="col-lg-10">
+						<div class="project-image-container">
+							<img 
+								[src]="getProjectImage()" 
+								[alt]="getProjectName()"
+								class="img-fluid project-main-image"
+								loading="lazy">
+						</div>
+					</div>
+				</div>
+
+				<!-- Default Project Details -->
+				<div class="row justify-content-center mb-5" *ngIf="project.fullDescription || project.technologies || project.link">
+					<div class="col-lg-8">
+						<div class="project-content">
+							<div *ngIf="project.fullDescription" class="mb-4">
+								<h3 class="h4 mb-3">About This Project</h3>
+								<p class="text-muted">{{ project.fullDescription }}</p>
+							</div>
+							<div *ngIf="project.technologies && project.technologies.length > 0" class="mb-4">
+								<h3 class="h4 mb-3">Technologies</h3>
+								<div class="technologies-list">
+									<span *ngFor="let tech of project.technologies" class="badge badge-custom mr-2 mb-2">
+										{{ tech }}
+									</span>
+								</div>
+							</div>
+							<div *ngIf="project.link" class="mt-4 text-center">
+								<a [href]="project.link" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+									<i class="fas fa-external-link-alt"></i> View Project
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ng-template>
+
+			<!-- Navigation to Next/Previous Projects -->
+			<div class="project-nav mt-5 pt-4 border-top">
+				<a 
+					class="project-nav-text nav-prev" 
+					(click)="navigateToProject(getPreviousProject())"
+					*ngIf="getPreviousProject()"
+					style="cursor: pointer;">
+					<- Previous Project
+				</a>
+				<a 
+					class="project-nav-text nav-next" 
+					(click)="navigateToProject(getNextProject())"
+					*ngIf="getNextProject()"
+					style="cursor: pointer;">
+					Next Project ->
+				</a>
+			</div>
+		</div>
+	</section>
+</div>
+
+<!-- Loading or Not Found State -->
+<app-navbar></app-navbar>
+<div class="project-detail-wrapper" *ngIf="!project">
+	<section class="section">
+		<div class="container text-center">
+			<h2>Project Not Found</h2>
+			<p class="text-muted">The project you're looking for doesn't exist.</p>
+			<button class="btn btn-primary" (click)="goBack()">Go Back</button>
+		</div>
+	</section>
+</div>

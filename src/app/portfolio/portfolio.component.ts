@@ -19,4 +19,8 @@ export class PortfolioComponent implements OnInit {
 		this.changeDetectorRef.detectChanges();
 	}
 
+	getProjectUrl(projectName: string): string {
+		return projectName.toLowerCase().replace(/\s+/g, '-');
+	}
+
 }

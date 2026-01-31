@@ -9,6 +9,7 @@ import {NavbarComponent} from "../navbar/navbar.component";
 import {AboutComponent} from "../about/about.component";
 import {QuoteComponent} from "../quote/quote.component";
 import {PortfolioComponent} from "../portfolio/portfolio.component";
+import {ProjectDetailComponent} from "../portfolio/project-detail/project-detail.component";
 import {TrainingComponent} from "../training/training.component";
 import {AchievementComponent} from "../achievement/achievement.component";
 import {ContactComponent} from "../contact/contact.component";
@@ -17,7 +18,13 @@ import {FooterComponent} from "../footer/footer.component";
 import {WaifuComponent} from "../waifu/waifu.component";
 import {RouterModule, Routes} from "@angular/router";
 
-const routes: Routes = [{ path: '', component: ApplicationComponent }];
+const routes: Routes = [
+	{ path: '', component: ApplicationComponent },
+	{ 
+		path: 'portfolio/:projectId', 
+		component: ProjectDetailComponent 
+	}
+];
 
 @NgModule({
 	declarations: [
@@ -27,6 +34,7 @@ const routes: Routes = [{ path: '', component: ApplicationComponent }];
 		AboutComponent,
 		QuoteComponent,
 		PortfolioComponent,
+		ProjectDetailComponent,
 		TrainingComponent,
 		AchievementComponent,
 		ContactComponent,

@@ -29,10 +29,13 @@
                         <h3 class="mb-3 wow fadeIn">{{aboutData['name']}} <small class="text-muted"> -
                                 {{aboutData['about']['tech-stats']}} </small></h3>
                         <p class="text-muted wow slideInUp">{{aboutData["about"]["bio"]}}</p>
-                        <p class="text-muted wow fadeInDownBig"><strong>Game Engine and Creative tools</strong> :
-                            {{aboutData['about']['Game Engine and Creative tools'].join(', ')}}</p>
+                        
                         <p class="text-muted wow fadeInDownBig"><strong>Programming</strong> :
                             {{aboutData['about']['Programming'].join(', ')}}</p>
+                        <p class="text-muted wow fadeInDownBig"><strong>Frameworks and Tools</strong> :
+                            {{aboutData['about']['Frameworks and Tools'].join(', ')}}</p>
+                        <p class="text-muted wow fadeInDownBig"><strong>Graphics, Game and Creation</strong> :
+                            {{aboutData['about']['Graphics, Game and Creation'].join(', ')}}</p>
                     </div>
                 </div>
                 <div class="tab-pane fade" [ngClass]="{'active show': activeTab === 'skill'}" id="skill"

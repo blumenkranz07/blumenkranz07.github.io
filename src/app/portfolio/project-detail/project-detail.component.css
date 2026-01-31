@@ -1,0 +1,211 @@
+.project-detail-section {
+	padding: 200px 0 80px 0;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #242a35 0%, #212529 100%);
+	color: #ffffff;
+}
+
+/* Constrain page width for better readability */
+.project-detail-section .container {
+	max-width: 900px;
+}
+
+.back-btn-container {
+	margin-left: 2rem;
+}
+
+.back-btn {
+	color: #ffffff;
+	padding: 0;
+	border: none;
+	background: transparent;
+	font-family: "Black Ops One", cursive;
+	font-size: 1.3rem;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.back-btn:hover {
+	color: #ff86cd;
+	transform: translateX(-5px);
+	text-decoration: none;
+}
+
+.project-header {
+	margin-bottom: 0;
+}
+
+.project-title {
+	font-size: 3rem;
+	font-weight: bold;
+	color: #ffffff;
+	text-transform: capitalize;
+	padding: 50px 0 10px 0; /* top right bottom left - reduced bottom padding */
+}
+
+.project-duration {
+	font-size: 0.95rem;
+	color: #c2c1c1;
+	opacity: 0.9;
+	font-style: italic;
+	margin-top: -10px;
+	margin-bottom: 20px;
+	letter-spacing: 0.5px;
+}
+
+.project-description {
+	font-size: 1.25rem;
+	color: #f8f9fa;
+	opacity: 0.9;
+}
+
+.project-image-container {
+	/* Plain container - no styling */
+}
+
+.project-main-image {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.project-video-container {
+	/* Plain container - no styling */
+}
+
+.project-main-video {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.project-youtube-embed {
+	width: 100%;
+	height: 450px;
+	display: block;
+	border-radius: 8px;
+}
+
+.project-content {
+	background: rgba(255, 255, 255, 0.05);
+	padding: 30px;
+	border-radius: 10px;
+	backdrop-filter: blur(10px);
+}
+
+.project-content-plain {
+	padding:   0;
+}
+
+.project-content-plain h2,
+.project-content-plain h3,
+.project-content-plain h4 {
+	color: #ffffff;
+	margin-bottom: 5px;
+}
+
+.project-content-plain p {
+	color: #c2c1c1; /* Slightly grey, brighter than image captions */
+	line-height: 1.8;
+	font-size: 1.1rem;
+	white-space: pre-line; /* Preserve line breaks from \n */
+}
+
+.project-content h3 {
+	color: #ff86cd;
+	margin-bottom: 5px;
+}
+
+.project-content p {
+	color: #f8f9fa;
+	line-height: 1.8;
+	font-size: 1.1rem;
+}
+
+.technologies-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.badge-custom {
+	background: #ff86cd;
+	color: #242a35;
+	padding: 8px 16px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	border-radius: 20px;
+	display: inline-block;
+}
+
+.project-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.project-nav-text {
+	color: #ffffff;
+	text-decoration: none;
+	padding: 10px 0;
+	transition: all 0.3s ease;
+	font-size: 1.2rem;
+	opacity: 0.8;
+}
+
+.nav-prev {
+	text-align: left;
+}
+
+.nav-next {
+	margin-left: auto;
+	text-align: right;
+}
+
+.project-nav-text:hover {
+	color: #ff86cd;
+	text-decoration: none;
+	opacity: 1;
+}
+
+/* Gallery row styling to ensure proper column layout */
+.gallery-row {
+	/* Bootstrap row already handles this, but ensure it's set */
+}
+
+.gallery-row > div {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Force 2-column galleries to display side-by-side at md breakpoint and above */
+@media (min-width: 768px) {
+	.gallery-row > div.col-md-6 {
+		flex: 0 0 50% !important;
+		max-width: 50% !important;
+	}
+}
+
+@media (max-width: 768px) {
+	.project-title {
+		font-size: 2rem;
+	}
+
+	.project-description {
+		font-size: 1rem;
+	}
+
+	.project-content {
+		padding: 20px;
+	}
+
+	.project-content-plain {
+		padding: 10px 0;
+	}
+
+	.project-youtube-embed {
+		height: 300px;
+	}
+}

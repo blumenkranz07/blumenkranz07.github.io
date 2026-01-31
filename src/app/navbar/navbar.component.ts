@@ -1,4 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Location } from '@angular/common';
 
 declare var data : any;
 declare var identity : any;
@@ -24,8 +26,13 @@ export class NavbarComponent implements OnInit {
 	public navbarProfileVisibility : boolean = false;
 	public sticky : boolean = false;
 	public animation : string = "";
+	private isOnHomePage: boolean = true;
 
-	constructor(private changeDetectorRef: ChangeDetectorRef) {}
+	constructor(
+		private changeDetectorRef: ChangeDetectorRef,
+		private router: Router,
+		private location: Location
+	) {}
 
 	ngOnInit(): void {
 		for (const link of this.navbarData['links']) {
@@ -37,7 +44,36 @@ export class NavbarComponent implements OnInit {
 			if (event.code === "Escape" && this.navbarProfileVisibility){
 				this.removeProfile();
 			}
-		})
+		});
+		
+		// Check current route
+		this.checkCurrentRoute();
+		
+		// Listen to route changes
+		this.router.events.subscribe(event => {
+			if (event instanceof NavigationEnd) {
+				this.checkCurrentRoute();
+			}
+		});
+	}
+	
+	private checkCurrentRoute(): void {
+		const url = this.location.path();
+		this.isOnHomePage = url === '' || url === '/';
+		
+		// If on detail page, set Portfolio as active and make navbar sticky (with background)
+		if (!this.isOnHomePage && url.startsWith('/portfolio/')) {
+			this.activeClass = 'Portfolio';
+			// Force navbar to have background on detail pages
+			this.sticky = true;
+			this.changeDetectorRef.detectChanges();
+		} else if (this.isOnHomePage) {
+			// Reset scroll tracking on home page
+			this.firstScroll = true;
+			this.firstClick = true;
+			// Reset sticky state on home page (will be set by scroll listener)
+			this.sticky = scrollY + 50 >= window.innerHeight;
+		}
 	}
 	ngAfterViewInit(){
 		let navTabs: any = document.querySelectorAll('.nav-link a');
@@ -73,6 +109,17 @@ export class NavbarComponent implements OnInit {
 
 	@HostListener('window:scroll',['$event'])
 	onWindowScroll(){
+		// On detail pages, keep navbar sticky (with background) always
+		if (!this.isOnHomePage && this.location.path().startsWith('/portfolio/')) {
+			this.sticky = true;
+			return;
+		}
+		
+		// Only update active class on home page
+		if (!this.isOnHomePage) {
+			return;
+		}
+		
 		if (this.firstScroll) {
 			this.updateOffsetLink();
 			this.firstScroll = false;
@@ -81,6 +128,7 @@ export class NavbarComponent implements OnInit {
 		this.sticky = scroll + 50 >= window.innerHeight;
 		let index: number = this.binarySearch(scroll);
 		this.activeClass = this.offsetLink[index];
+		this.changeDetectorRef.detectChanges();
 	}
 
 	@HostListener('window:resize', ['$event'])
@@ -116,6 +164,17 @@ export class NavbarComponent implements OnInit {
 	}
 
 	updateActiveLink(navLink : String) {
+		// If not on home page, navigate to home first
+		if (!this.isOnHomePage) {
+			this.router.navigate(['/']).then(() => {
+				// Wait for navigation and DOM update, then scroll
+				setTimeout(() => {
+					this.updateActiveLink(navLink);
+				}, 100);
+			});
+			return;
+		}
+		
 		if(this.firstClick){
 			this.updateOffsetLink();
 			this.firstClick = false;
